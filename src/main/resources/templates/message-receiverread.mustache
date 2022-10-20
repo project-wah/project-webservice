@@ -1,0 +1,42 @@
+{{>layout/header}}
+
+<table class="table table-horizontal table-bordered">
+    <thead class="thead-strong">
+    <tr>
+        <th>보낸 사람</th>
+        <th>받은 사람</th>
+        <th>제목</th>
+        <th>메시지 생성일</th>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+    {{#readList}}
+        <tr>
+            <td><a href="/users/detail/read/{{senderId}}">{{sender}}</td>
+            <td><a href="/users/detail/read/{{receiverId}}">{{receiver}}</a></td>
+            <td><a href="/message/detail/read/{{id}}">{{title}}</td>
+            <td>{{createDate}}</td>
+        </tr>
+    {{/readList}}
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        {{#hasPrev}}
+            <li class="page-item"><a class="page-link" href="?page={{previous}}">Previous</a></li>
+        {{/hasPrev}}
+        {{^hasPrev}}
+            <li class="page-item"><a class="page-link" href="?page={{previous}}">Previous</a></li>
+        {{/hasPrev}}
+        {{#hasNext}}
+            <li class="page-item"><a class="page-link" href="?page={{next}}">Next</a></li>
+        {{/hasNext}}
+        {{^hasNext}}
+            <li class="page-item"><a class="page-link" href="?page={{next}}">Next</a></li>
+        {{/hasNext}}
+    </ul>
+</nav>
+
+
+{{>layout/footer}}

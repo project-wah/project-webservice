@@ -7,7 +7,7 @@
         <th>보낸 사람</th>
         <th>받은 사람</th>
         <th>제목</th>
-        <th>내용</th>
+        <th>메시지 생성일</th>
     </tr>
     </thead>
     <tbody id="tbody">
@@ -16,7 +16,7 @@
             <td><a href="/users/detail/read/{{senderId}}">{{sender}}</td>
             <td><a href="/users/detail/read/{{receiverId}}">{{receiver}}</td>
             <td><a href="/message/detail/read/{{id}}">{{title}}</td>
-            <td>{{content}}</td>
+            <td>{{createDate}}</td>
         </tr>
     {{/readList}}
     </tbody>

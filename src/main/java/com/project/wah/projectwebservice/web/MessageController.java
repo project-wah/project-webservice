@@ -2,47 +2,101 @@ package com.project.wah.projectwebservice.web;
 
 import com.project.wah.projectwebservice.config.auth.LoginUser;
 import com.project.wah.projectwebservice.config.auth.dto.SessionUser;
-import com.project.wah.projectwebservice.domain.message.Message;
-import com.project.wah.projectwebservice.domain.user.User;
-import com.project.wah.projectwebservice.domain.user.UserRepository;
-import com.project.wah.projectwebservice.response.Response;
 import com.project.wah.projectwebservice.service.MessageService;
-import com.project.wah.projectwebservice.web.dto.MessageDto;
-import com.project.wah.projectwebservice.web.dto.message.*;
-import io.swagger.annotations.ApiOperation;
+import com.project.wah.projectwebservice.web.dto.message.MessageListReadResponseDto;
+import com.project.wah.projectwebservice.web.dto.message.MessageReadResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RequiredArgsConstructor
-@RestController
+@Controller
 public class MessageController {
 
     private final MessageService messageService;
 
-    // 쪽지 생성
-    @PostMapping("/message")
-    public Message createMessage(@RequestBody MessageCreateRequestDto messageCreateRequestDto,
-                                 @LoginUser SessionUser sessionUser) {
-        return  messageService.createMessage(messageCreateRequestDto, sessionUser);
+    // 메시지 보관함
+    @GetMapping("/message/locker")
+    public String messagelocker(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("useName", user.getName());
+            model.addAttribute("userdName", user);
+        }
+
+        return "message-locker";
+
+    }
+
+    // 메시지 생성
+    @GetMapping("/message/create")
+    public String messageCreate(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("useName", user.getName());
+            model.addAttribute("userdName", user);
+        }
+
+        return "message-create";
+
+    }
+
+    // 받은 메시지 조회
+    @GetMapping("/message/receiver/read")
+    public String receiverReadMessage(Model model, @LoginUser SessionUser user, @PageableDefault(size = 15, sort = "createdate", direction = Sort.Direction.DESC) Pageable pageable) {
+        if(user != null) {
+            model.addAttribute("useName", user.getName());
+            model.addAttribute("userdName", user);
+        }
+
+        Page<MessageListReadResponseDto> readList = messageService.findAllReceiverDesc(user, pageable);
+
+        model.addAttribute("readList", readList);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("hasNext", readList.hasNext());
+        model.addAttribute("hasPrev", readList.hasPrevious());
+
+        return "message-receiverread";
+    }
+
+    // 보낸 메시지 조회
+    @GetMapping("/message/sender/read")
+    public String senderReadMessage(Model model, @LoginUser SessionUser user, @PageableDefault(size = 15, sort = "createdate", direction = Sort.Direction.DESC) Pageable pageable) {
+        if(user != null) {
+            model.addAttribute("useName", user.getName());
+            model.addAttribute("userdName", user);
+        }
+
+        Page<MessageListReadResponseDto> readList = messageService.findAllSenderDesc(user, pageable);
+
+        model.addAttribute("readList", readList);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("hasNext", readList.hasNext());
+        model.addAttribute("hasPrev", readList.hasPrevious());
+
+        return "message-senderread";
     }
 
     // 메시지 상세 조회
-    @GetMapping("/message/read/{messageId}")
-    public MessageReadResponseDto findById (@PathVariable int messageId) {
-        return messageService.findById(messageId);
+    @GetMapping("/message/detail/read/{id}")
+    public String messageDetailRead(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("useName", user.getName());
+            model.addAttribute("userdName", user);
+        }
+
+        MessageReadResponseDto dto = messageService.findById(id, user);
+
+        model.addAttribute("mess", dto);
+
+        return "message-detailread";
+
     }
 
-
-//    @DeleteMapping("/message/{messageId}")
-//    public ResponseEntity<MessageDeleteResponseDto> find(@PathVariable int messageId,
-//                                                         @LoginUser SessionUser sessionUser) {
-//        return messageService.deleteMessage(messageId, sessionUser);
-//    }
 }
-
-

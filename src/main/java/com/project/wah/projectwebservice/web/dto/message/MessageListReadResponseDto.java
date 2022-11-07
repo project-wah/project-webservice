@@ -10,16 +10,15 @@ import java.time.LocalDateTime;
 // 메시지 전체 조회 DTO
 @Getter
 public class MessageListReadResponseDto {
-    private int id;
+    private Long id;
     private String title;
     private String content;
     private String receiver;
     private String sender;
-    private Boolean readState;
     private LocalDate createDate;   // 조회를 할 경우, 나노 초를 보여주지 않기 위해 LocalDate를 사용
     // 송, 수신자 회원 상세 정보 조회를 하기 위해 id값 받음
-    private int receiverId;
-    private int senderId;
+    private Long receiverId;
+    private Long senderId;
 
     public MessageListReadResponseDto(Message entity) {
         this.id = entity.getId();
@@ -27,7 +26,6 @@ public class MessageListReadResponseDto {
         this.content = entity.getContent();
         this.receiver = entity.getReceiver().getNickname();
         this.sender = entity.getSender().getNickname();
-        this.readState = entity.isReadstate();
         this.createDate = entity.getCreatedate().toLocalDate();
         this.receiverId = entity.getReceiver().getId();
         this.senderId = entity.getSender().getId();

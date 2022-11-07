@@ -1,6 +1,5 @@
 package com.project.wah.projectwebservice.config.auth.dto;
 
-import com.project.wah.projectwebservice.domain.user.Role;
 import com.project.wah.projectwebservice.domain.user.User;
 import lombok.Getter;
 
@@ -9,7 +8,7 @@ import java.io.Serializable;
 // SessionUser = UsersResponseDTO(유저 조회 DTO)
 @Getter
 public class SessionUser implements Serializable {
-    private int id;
+    private Long id;
     private String name;
     private String email;
     private String picture;

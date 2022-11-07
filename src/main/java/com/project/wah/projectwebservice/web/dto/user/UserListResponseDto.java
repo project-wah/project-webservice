@@ -1,4 +1,4 @@
-package com.project.wah.projectwebservice.web.dto;
+package com.project.wah.projectwebservice.web.dto.user;
 
 import com.project.wah.projectwebservice.domain.user.User;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 public class UserListResponseDto {
-    private int id;
+    private Long id;
     private String name;
     private String email;
     private String picture;

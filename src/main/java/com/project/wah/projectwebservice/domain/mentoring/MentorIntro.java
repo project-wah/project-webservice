@@ -71,4 +71,15 @@ public class MentorIntro {
         this.person = person;
     }
 
+    public void update(String title, String job, String career, String office, String content, Integer hour, Integer minutes, Integer price, Integer person) {
+        this.title = title;
+        this.job = job;
+        this.career = career;
+        this.office = office;
+        this.content = content;
+        this.hour = hour;
+        this.minutes = minutes;
+        this.price = price;
+        this.person = person;
+    }
 }

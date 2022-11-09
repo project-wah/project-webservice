@@ -54,6 +54,8 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 
+	testImplementation('org.springframework.security:spring-security-test')
+
 }
 
 // clean task 실행시 QClass 삭제

@@ -1,5 +1,6 @@
 package com.project.wah.projectwebservice.domain.mentoring;
 
+import com.project.wah.projectwebservice.domain.BaseTimeEntity;
 import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class MentorIntro {
+public class MentorIntro extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

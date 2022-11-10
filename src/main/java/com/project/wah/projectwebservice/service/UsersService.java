@@ -6,10 +6,13 @@ import com.project.wah.projectwebservice.config.auth.dto.SessionUser;
 import com.project.wah.projectwebservice.domain.user.Role;
 import com.project.wah.projectwebservice.domain.user.User;
 import com.project.wah.projectwebservice.domain.user.UserRepository;
+import com.project.wah.projectwebservice.web.dto.user.UserListResponseDto;
 import com.project.wah.projectwebservice.web.dto.user.UsersResponseDto;
 import com.project.wah.projectwebservice.web.dto.user.UsersUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +24,7 @@ public class UsersService {
 
     private final UserRepository userRepository;
 
+    // 유저 상세 정보 수정
     @Transactional
     public Long update(SessionUser sessionUser, UsersUpdateRequestDto requestDto, HttpSession httpSession){
         User user = userRepository.findById(sessionUser.getId()).orElseThrow(() ->
@@ -34,6 +38,7 @@ public class UsersService {
         return sessionUser.getId();
     }
 
+    // 유저 상세 조회
     @Transactional
     public UsersResponseDto findById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() ->
@@ -42,6 +47,17 @@ public class UsersService {
         return new UsersResponseDto(user);
     }
 
+    // 유저 전체 조회
+    @Transactional
+    public Page<UserListResponseDto> findAllDesc(Pageable pageable) {
+        Page<User> userList = userRepository.findAllDesc(pageable);
+
+        Page<UserListResponseDto> userPagingList = userList.map(user -> new UserListResponseDto(user));
+
+        return userPagingList;
+    }
+
+    // 회원 탈퇴
     @Transactional
     public Long delete (SessionUser sessionUser, HttpSession httpSession) {
         User user = userRepository.findById(sessionUser.getId()).orElseThrow(() ->
@@ -53,5 +69,15 @@ public class UsersService {
         httpSession.invalidate();
 
         return sessionUser.getId();
+    }
+
+    // 유저 이름(name) 검색
+    @Transactional
+    public Page<UserListResponseDto> searchName(String search, Pageable pageable) {
+        Page<User> userList = userRepository.findByNameContaining(search, pageable);
+
+        Page<UserListResponseDto> userPagingList = userList.map(user -> new UserListResponseDto(user));
+
+        return userPagingList;
     }
 }

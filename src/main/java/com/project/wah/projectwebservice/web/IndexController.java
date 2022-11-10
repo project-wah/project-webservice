@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
-
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
@@ -23,6 +22,5 @@ public class IndexController {
         }
         return "index";
     }
-
 
 }

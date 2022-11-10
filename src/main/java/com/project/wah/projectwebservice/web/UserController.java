@@ -3,9 +3,11 @@ package com.project.wah.projectwebservice.web;
 
 import com.project.wah.projectwebservice.config.auth.LoginUser;
 import com.project.wah.projectwebservice.config.auth.dto.SessionUser;
+import com.project.wah.projectwebservice.domain.user.User;
 import com.project.wah.projectwebservice.service.UsersService;
 import com.project.wah.projectwebservice.web.dto.user.UsersResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +19,7 @@ public class UserController {
 
     private final UsersService usersService;
 
-    //회원 정보 수정
+    // 회원 정보 수정
     @GetMapping("/users/update")
     public String usersUpdate(Model model, @LoginUser SessionUser user){
 
@@ -28,7 +30,7 @@ public class UserController {
         return "user-update";
     }
 
-    //유저 상세 보기
+    // 유저 상세 보기
     @GetMapping("/users/detail/read/{id}")
     public String userDetailRead(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -41,6 +43,6 @@ public class UserController {
         model.addAttribute("useDetail", dto);
 
         return "user-detailread";
-
     }
+
 }

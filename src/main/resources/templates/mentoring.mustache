@@ -1,0 +1,38 @@
+{{>layout/header}}
+
+<h1>멘토링 서비스</h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/mentoring/apply" role="button" class="btn btn-primary">멘토 지원하기</a>
+        </div>
+    </div>
+    <br>
+    <!-- 목록 출력 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>게시글번호</th>
+            <th>제목</th>
+            <th>이름</th>
+            <th>직무</th>
+            <th>경력</th>
+            <th>현재 직장</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#mentoringList}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{title}}</td>
+                <td>{{mentor}}</td>
+                <td>{{job}}</td>
+                <td>{{career}}</td>
+                <td>{{office}}</td>
+            </tr>
+        {{/mentoringList}}
+        </tbody>
+    </table>
+</div>
+
+{{>layout/footer}}

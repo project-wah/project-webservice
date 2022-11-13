@@ -50,4 +50,11 @@ public class MentorIntroService {
     public List<MentorIntroListResponseDto> findAllDesc() {
         return mentorIntroRepository.findAllDesc().stream().map(MentorIntroListResponseDto::new).collect(Collectors.toList());
     }
+
+    @Transactional
+    public void delete (Long id) {
+        MentorIntro mentorIntro = mentorIntroRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 멘토링 소개글은 없습니다. id=" + id));
+
+        mentorIntroRepository.delete(mentorIntro);
+    }
 }

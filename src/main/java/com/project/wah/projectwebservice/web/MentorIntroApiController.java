@@ -27,4 +27,10 @@ public class MentorIntroApiController {
     public MentorIntroResponseDto findById (@PathVariable Long id) {
         return mentorIntroService.findById(id);
     }
+
+    @DeleteMapping("/api/v1/mentorIntro/{id}")
+    public Long delete(@PathVariable Long id) {
+        mentorIntroService.delete(id);
+        return id;
+    }
 }

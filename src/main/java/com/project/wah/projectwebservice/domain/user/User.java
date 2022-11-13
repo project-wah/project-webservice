@@ -71,49 +71,6 @@ public class User extends BaseTimeEntity {
         }
     }
 
-//    // 회원이 받은 쪽지를 찾는다.
-//    public Optional<Message> findMessage(int messageId) {
-//        if (messageId <= 0) {
-//            return Optional.empty();
-//        }
-//        for (Message message : readMessage) {
-//            if (message.getId() == messageId) {
-//                return Optional.ofNullable(message);
-//            }
-//        }
-//        for (Message message : sendMessage) {
-//            if (message.getId() == messageId) {
-//                return Optional.ofNullable(message);
-//            }
-//        }
-//        return Optional.empty();
-//    }
-//
-//    // 회원이 받은 쪽지를 삭제한다.
-//    public boolean deleteMessage(int messageId) {
-//        if (messageId <= 0) {
-//            return false;
-//        }
-//        // 리스트를 돌아서 해당하는 쪽지 찾는다
-//        Iterator<Message> iterator = readMessage.iterator();
-//        while (iterator.hasNext()) {
-//            // 수정해야 될 부분
-//            if (Objects.equals(iterator.next().getId(), messageId)) {
-//                iterator.remove();
-//                return true;
-//            }
-//        }
-//        Iterator<Message> sendIterator = sendMessage.iterator();
-//        while (sendIterator.hasNext()) {
-//            // 수정해야 될 부분
-//            if (Objects.equals(sendIterator.next().getId(), messageId)) {
-//                sendIterator.remove();
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
     @Builder
     public User(int id, String name, String email, String picture, Role role) {
         this.id = id;

@@ -21,16 +21,16 @@
         </tr>
         </thead>
         <tbody id="tbody">
-        {{#mentoringList}}
+        {{#mentoring}}
             <tr>
                 <td>{{id}}</td>
-                <td>{{title}}</td>
+                <td><a href="/mentoring/update/{{id}}">{{title}}</a></td>
                 <td>{{mentor}}</td>
                 <td>{{job}}</td>
                 <td>{{career}}</td>
                 <td>{{office}}</td>
             </tr>
-        {{/mentoringList}}
+        {{/mentoring}}
         </tbody>
     </table>
 </div>

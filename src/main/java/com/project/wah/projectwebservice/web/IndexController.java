@@ -146,44 +146,4 @@ public class IndexController {
 
     }
 
-//    // 받은 쪽지 검색 후 리스트 조회
-//    @GetMapping("/message/receiver/search")
-//    public String receiverSearch(String title, @PageableDefault(size = 15, sort = "createdate", direction = Sort.Direction.DESC) Pageable pageable, Model model, @LoginUser SessionUser user) {
-//        if(user != null) {
-//            model.addAttribute("useName", user.getName());
-//            model.addAttribute("userdName", user);
-//        }
-//
-//        Page<MessageListReadResponseDto> searchList = messageService.findReceiverMessageSearch(title, pageable, user);
-//
-//        model.addAttribute("searchList", searchList);
-//        model.addAttribute("title", title);
-//        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-//        model.addAttribute("next", pageable.next().getPageNumber());
-//        model.addAttribute("hasNext", searchList.hasNext());
-//        model.addAttribute("hasPrev", searchList.hasPrevious());
-//
-//        return "message-receiversearch";
-//    }
-
-//    // 보낸 쪽지 검색 후 리스트 조회
-//    @GetMapping("/message/sender/search")
-//    public String senderSearch(String title, @PageableDefault(size = 15, sort = "createdate", direction = Sort.Direction.DESC) Pageable pageable, Model model, @LoginUser SessionUser user) {
-//        if(user != null) {
-//            model.addAttribute("useName", user.getName());
-//            model.addAttribute("userdName", user);
-//        }
-//
-//        Page<MessageListReadResponseDto> searchList = messageService.findSenderMessagesearch(user, pageable);
-//
-//        model.addAttribute("searchList", searchList);
-//        model.addAttribute("title", title);
-//        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-//        model.addAttribute("next", pageable.next().getPageNumber());
-//        model.addAttribute("hasNext", searchList.hasNext());
-//        model.addAttribute("hasPrev", searchList.hasPrevious());
-//
-//        return "message-sendersearch";
-//    }
-
 }

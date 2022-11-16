@@ -33,7 +33,7 @@ public class MentoringController {
     @GetMapping("/mentoring/update/{id}")
     public String mentoringUpdate(@PathVariable Long id, Model model) {
         MentorIntroResponseDto dto = mentorIntroService.findById(id);
-        model.addAttribute("mentoring-update", dto);
+        model.addAttribute("mentoringUpdate", dto);
 
         return "mentoring-update";
     }

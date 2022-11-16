@@ -4,8 +4,8 @@ var main = {
         $('#btn-save').on('click', function () {
             _this.save();
         });
-        $('#btn-update').on('click', function () {
-            _this.update();
+        $('#btn-mentorUpdate').on('click', function () {
+            _this.mentorUpdate();
         })
         $('#btn-delete').on('click', function () {
             _this.delete();
@@ -39,7 +39,7 @@ var main = {
         });
     },
 
-    update : function () {
+    mentorUpdate : function () {
         var data = {
             mentor: $('#mentor').val(),
             title: $('#title').val(),

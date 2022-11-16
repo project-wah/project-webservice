@@ -15,47 +15,56 @@ public class MentorIntro extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
 
     // 멘토 실명
-    @NotNull
+    //@NotNull
+    @Column(nullable = false)
     private String mentor;
 
     // 멘토 소개 제목
     @NotNull
-    @Column(length = 500)
+    @Column(length = 500, nullable = false)
     private String title;
 
     // 직무
-    @NotNull
+    //@NotNull
+    @Column(nullable = false)
     private String job;
 
     // 경력
-    @NotNull
+    //@NotNull
+    @Column(nullable = false)
     private String career;
 
     // 현재 직장 (공개 여부 설정 가능)
+    @Column
     private String office;
 
     // 멘토 소개 상세
-    @NotNull
-    @Column(columnDefinition = "TEXT")
+    //@NotNull
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
     // 회당 멘토링 시간(hour)
-    @NotNull
+    //@NotNull
+    @Column(nullable = false)
     private Integer hour;
 
     // 회당 멘토링 시간(minute)
-    @NotNull
+    //@NotNull
+    @Column(nullable = false)
     private Integer minutes;
 
     // 회당 멘토링 가격
-    @NotNull
+    //@NotNull
+    @Column(nullable = false)
     private Integer price;
 
     // 회당 멘토링 가능 인원
-    @NotNull
+    //@NotNull
+    @Column(nullable = false)
     private Integer person;
 
     @Builder

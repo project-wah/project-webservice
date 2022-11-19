@@ -7,6 +7,7 @@ import com.project.wah.projectwebservice.domain.message.MessageRepository;
 import com.project.wah.projectwebservice.domain.user.User;
 import com.project.wah.projectwebservice.domain.user.UserRepository;
 import com.project.wah.projectwebservice.web.dto.message.*;
+import com.project.wah.projectwebservice.web.dto.user.UserListResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -76,6 +77,17 @@ public class MessageService {
         return messagePagingList;
     }
 
+    // 회원 별 메시지 리스트 조회 (회원 별 송신 메시지 리스트 조회)
+    @Transactional
+    public Page<MessageListReadResponseDto> findAllMessageDesc(Long id, Pageable pageable) {
+
+        Page<Message> messageList = messageRepository.findAllSenderDesc(id, pageable);
+
+        Page<MessageListReadResponseDto> messagePagingList = messageList.map(message -> new MessageListReadResponseDto(message));
+
+        return messagePagingList;
+    }
+
     // 메시지 삭제
     public void deleteMessage (Long id) {
         Message message = messageRepository.findById(id)
@@ -83,4 +95,5 @@ public class MessageService {
 
         messageRepository.delete(message);
     }
+
 }

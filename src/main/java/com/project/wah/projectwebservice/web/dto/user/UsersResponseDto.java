@@ -1,5 +1,6 @@
 package com.project.wah.projectwebservice.web.dto.user;
 
+import com.project.wah.projectwebservice.domain.user.Role;
 import com.project.wah.projectwebservice.domain.user.User;
 import lombok.Getter;
 
@@ -12,6 +13,7 @@ public class UsersResponseDto {
     private String githubemail;
     private String blogaddress;
     private int phonenumber;
+    private Role role;
 
     public UsersResponseDto(User user) {
         this.id = user.getId();
@@ -21,5 +23,6 @@ public class UsersResponseDto {
         this.githubemail = user.getGithubemail();
         this.blogaddress = user.getBlogaddress();
         this.phonenumber = user.getPhonenumber();
+        this.role = user.getRole();
     }
 }

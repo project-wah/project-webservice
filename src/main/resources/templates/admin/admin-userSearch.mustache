@@ -22,18 +22,20 @@
             <th>이메일</th>
             <th>가입일</th>
             <th>권한</th>
-            <th>권한 변경</th>
+            <th>게시물 수</th>
+            <th>메시지 수</th>
         </tr>
         </thead>
         <tbody id="tbody">
         {{#userSearch}}
             <tr>
-                <td>{{name}}</td>
+                <td><a href="/admin/user/search/{{id}}">{{name}}</a></td>
                 <td>{{#nickname}}{{nickname}}{{/nickname}}{{^nickname}}-{{/nickname}}</td>
                 <td>{{email}}</td>
                 <td>{{createdDate}}</td>
                 <td>{{role}}</td>
-                <td>권한 변경</td>
+                <td>-</td>
+                <td>{{messageSize}}</td>
             </tr>
         {{/userSearch}}
         </tbody>

@@ -46,9 +46,9 @@ dependencies {
 }
 
 // clean task 실행시 QClass 삭제
-clean {
-	delete file('src/main/generated') // 인텔리제이 Annotation processor 생성물 생성 위치
-}
+//clean {
+//	delete file('src/main/generated') // 인텔리제이 Annotation processor 생성물 생성 위치
+//}
 
 test {
 	useJUnitPlatform()

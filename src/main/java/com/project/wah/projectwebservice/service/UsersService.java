@@ -38,7 +38,18 @@ public class UsersService {
         return sessionUser.getId();
     }
 
-    // 유저 상세 조회
+    // 유저 권한 수정
+    @Transactional
+    public Long roleUpdate(Long id, UsersUpdateRequestDto requestDto) {
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("해당 유저가 없습니다. id="+ id));
+
+        user.roleUpdate(requestDto.getRole());
+
+        return id;
+    }
+
+   // 유저 상세 조회
     @Transactional
     public UsersResponseDto findById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() ->

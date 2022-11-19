@@ -23,6 +23,12 @@ public class UsersApiController {
         return usersService.update(sessionUser, requestDto, httpSession);
     }
 
+    //User 권한 수정
+    @PutMapping("/api/v1/users/update/{id}")
+    public Long roleUpdate(@PathVariable Long id, @RequestBody UsersUpdateRequestDto requestDto) {
+        return usersService.roleUpdate(id, requestDto);
+    }
+
     //User 테이블 개별 조회
     @GetMapping("/api/v1/users/{id}")
     public UsersResponseDto findById (@PathVariable Long id){
@@ -34,7 +40,6 @@ public class UsersApiController {
     public Long delete(@LoginUser SessionUser sessionUser, HttpSession httpSession) {
         return usersService.delete(sessionUser, httpSession);
     }
-
 
 
 }

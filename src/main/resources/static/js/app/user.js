@@ -52,7 +52,6 @@ var main = {
 
     }
 
-
 };
 
 main.init();

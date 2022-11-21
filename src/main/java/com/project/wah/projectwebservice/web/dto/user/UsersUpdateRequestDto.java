@@ -1,4 +1,4 @@
-package com.project.wah.projectwebservice.web.dto;
+package com.project.wah.projectwebservice.web.dto.user;
 
 import com.project.wah.projectwebservice.domain.user.Role;
 import lombok.Builder;

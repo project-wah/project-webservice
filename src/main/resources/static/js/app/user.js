@@ -1,9 +1,6 @@
 var main = {
     init : function () {
         var _this = this;
-        $('#btn-save').on('click', function () {
-            _this.save();
-        });
 
         $('#btn-update').on('click', function() {
             _this.update();
@@ -12,18 +9,6 @@ var main = {
         $('#btn-delete').on('click', function() {
             _this.delete();
         });
-
-    },
-    save : function () {
-        var data = {
-            nickname: $('#nickname').val(),
-            aboutme: $('#aboutme').val(),
-            mentoremail: $('#mentoremail').val(),
-            githubemail: $('#githubemail').val(),
-            blogaddress: $('#blogaddress').val(),
-            phonenumber: $('#phonenumber').val()
-        };
-
 
     },
     update : function() {

@@ -7,6 +7,7 @@ import com.project.wah.projectwebservice.domain.message.MessageRepository;
 import com.project.wah.projectwebservice.domain.user.User;
 import com.project.wah.projectwebservice.domain.user.UserRepository;
 import com.project.wah.projectwebservice.web.dto.message.*;
+import com.project.wah.projectwebservice.web.dto.user.UserListResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +22,7 @@ public class MessageService {
     private final MessageRepository messageRepository;
     private final UserRepository userRepository;
 
-    // 쪽지 보내기
+    // 메시지 보내기
     @Transactional
     public Message createMessage(MessageCreateRequestDto requestDto, SessionUser sessionUser) {
 
@@ -32,7 +33,7 @@ public class MessageService {
 
         User receivedUser = receivedUserOptional.get();
 
-        // 메시지 보내는 코드
+        // 메시지 생성
         Message message = Message.builder()
                 .receiver(receivedUser)
                 .title(requestDto.getTitle())
@@ -45,15 +46,16 @@ public class MessageService {
 
     }
 
-    // 쪽지 상세 읽기
-    public MessageReadResponseDto findById(int id) {
+    // 메시지 상세 읽기
+    @Transactional
+    public MessageReadResponseDto findById(Long id, SessionUser sessionUser) {
         Message message = messageRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 메시지가 없습니다. id= " + id));
 
         return new MessageReadResponseDto(message);
     }
 
-    // 받은 쪽지 리스트 조회
+    // 받은 메시지 리스트 조회
     @Transactional
     public Page<MessageListReadResponseDto> findAllReceiverDesc(@LoginUser SessionUser sessionUser, Pageable pageable) {
 
@@ -64,7 +66,8 @@ public class MessageService {
         return messagePagingList;
     }
 
-    // 보낸 쪽지 리스트 조회
+    // 보낸 메시지 리스트 조회
+    @Transactional
     public Page<MessageListReadResponseDto> findAllSenderDesc(@LoginUser SessionUser sessionUser, Pageable pageable) {
 
         Page<Message> messageList = messageRepository.findAllSenderDesc(sessionUser.getId(), pageable);
@@ -72,6 +75,25 @@ public class MessageService {
         Page<MessageListReadResponseDto> messagePagingList = messageList.map(message -> new MessageListReadResponseDto(message));
 
         return messagePagingList;
+    }
+
+    // 회원 별 메시지 리스트 조회 (회원 별 송신 메시지 리스트 조회)
+    @Transactional
+    public Page<MessageListReadResponseDto> findAllMessageDesc(Long id, Pageable pageable) {
+
+        Page<Message> messageList = messageRepository.findAllSenderDesc(id, pageable);
+
+        Page<MessageListReadResponseDto> messagePagingList = messageList.map(message -> new MessageListReadResponseDto(message));
+
+        return messagePagingList;
+    }
+
+    // 메시지 삭제
+    public void deleteMessage (Long id) {
+        Message message = messageRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 메시지가 없습니다. id= " + id));
+
+        messageRepository.delete(message);
     }
 
 }

@@ -1,0 +1,52 @@
+{{>admin/admin-sidebar}}
+
+<div class="content">
+    <div class="header-box">
+        <h1 class="fs-4"><span class="text-black", style="font-weight: bold;">
+            <a href="/admin">회원 관리</a></span></h1>
+    </div>
+
+    <hr class="h2-color mx-2">
+    <div class="message-table">
+        <table class="table table-striped">
+            <thead class="thead-strong">
+            <tr>
+                <th>보낸 사람</th>
+                <th>받은 사람</th>
+                <th>제목</th>
+                <th>생성일</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            {{#allMessages}}
+                <tr>
+                    <td>{{sender}}</td>
+                    <td>{{receiver}}</td>
+                    <td>{{title}}</td>
+                    <td>{{createDate}}</td>
+                </tr>
+            {{/allMessages}}
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {{#hasPrev}}
+                <li class="page-item"><a class="page-link" href="?page={{previous}}">이전</a></li>
+            {{/hasPrev}}
+            {{^hasPrev}}
+                <li class="page-item"><a class="page-link" href="?page={{previous}}">이전</a></li>
+            {{/hasPrev}}
+            {{#hasNext}}
+                <li class="page-item"><a class="page-link" href="?page={{next}}">다음</a></li>
+            {{/hasNext}}
+            {{^hasNext}}
+                <li class="page-item"><a class="page-link" href="?page={{next}}">다음</a></li>
+            {{/hasNext}}
+        </ul>
+    </nav>
+</div>
+</div>
+
+{{>layout/footer}}

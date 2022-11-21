@@ -1,0 +1,35 @@
+{{>layout/header}}
+
+<div class="col-md-12">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="username">이름</label>
+                <input type="text" class="form-control" id="username" value="{{useDetail.username}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="nickname">닉네임</label>
+                <input type="text" class="form-control" id="nickname" value="{{useDetail.nickname}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="githubemail">깃허브 이메일</label>
+                <input type="text" class="form-control" id="githubemail" value="{{useDetail.githubemail}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="blogaddress">블로그 주소</label>
+                <input type="text" class="form-control" id="blogaddress" value="{{useDetail.blogaddress}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="phonenumber">휴대폰 번호</label>
+                <input type="text" class="form-control" id="phonenumber" value="{{useDetail.phonenumber}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="aboutme">자기 소개</label>
+                <textarea class="form-control" id="aboutme" readonly>{{useDetail.aboutme}}</textarea>
+            </div>
+        </form>
+        <a href="/" role="button" class="btn btn-secondary">뒤로 가기</a>
+    </div>
+</div>
+
+{{>layout/footer}}

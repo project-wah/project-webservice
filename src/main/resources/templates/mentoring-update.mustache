@@ -1,0 +1,71 @@
+{{>layout/header}}
+
+<h1> 내 소개글 수정하기 </h1>
+
+<div class="col-md-12">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="id">글 번호</label>
+                <input type="text" class="form-control"
+                       id="id" value="{{mentoringUpdate.id}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="mentor">이름</label>
+                <input type="text" class="form-control"
+                       id="mentor" value="{{mentoringUpdate.mentor}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" class="form-control"
+                       id="title" value="{{mentoringUpdate.title}}">
+            </div>
+            <div class="form-group">
+                <label for="job">직무</label>
+                <input type="text" class="form-control"
+                       id="job" value="{{mentoringUpdate.job}}">
+            </div>
+            <div class="form-group">
+                <label for="career">경력</label>
+                <input type="text" class="form-control"
+                       id="career" value="{{mentoringUpdate.career}}">
+            </div>
+                <div class="form-group">
+                    <label for="office">현재 직장</label>
+                    <input type="text" class="form-control"
+                           id="office" value="{{mentoringUpdate.office}}">
+                </div>
+            <div class="form-group">
+                <label for="content">멘토링 내용</label>
+                <textarea class="form-control" id="content">
+                    {{mentoringUpdate.content}}
+                </textarea>
+            </div>
+            <div class="form-group">
+                <label for="hour">시간</label>
+                <input type="number" class="form-control"
+                       id="hour" value="{{mentoringUpdate.hour}}">
+            </div>
+            <div class="form-group">
+                <label for="minutes">분</label>
+                <input type="number" class="form-control"
+                       id="minutes" value="{{mentoringUpdate.minutes}}">
+            </div>
+            <div class="form-group">
+                <label for="price">회당 멘토링 가격</label>
+                <input type="number" class="form-control"
+                       id="price" value="{{mentoringUpdate.price}}">
+            </div>
+            <div class="form-group">
+                <label for="person">회당 멘토링 가능 인원</label>
+                <input type="number" class="form-control"
+                       id="person" value="{{mentoringUpdate.person}}">
+            </div>
+        </form>
+        <a href="/mentoring" role="button" class="btn btn-secondary">취소</a>
+        <button type="button" class="btn btn-primary" id="btn-mentorUpdate">수정 완료</button>
+        <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
+    </div>
+</div>
+
+{{>layout/footer}}

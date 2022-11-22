@@ -48,7 +48,7 @@ public class MessageService {
 
     // 메시지 상세 읽기
     @Transactional
-    public MessageReadResponseDto findById(Long id, SessionUser sessionUser) {
+    public MessageReadResponseDto findById(Long id) {
         Message message = messageRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 메시지가 없습니다. id= " + id));
 

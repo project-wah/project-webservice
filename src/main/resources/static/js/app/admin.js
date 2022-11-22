@@ -11,6 +11,10 @@ var main = {
             _this.roleUpdate();
         });
 
+        $('#btn-message-delete').on('click', function() {
+            _this.messageDelete();
+        });
+
     },
 
     roleUpdate : function() {
@@ -31,7 +35,25 @@ var main = {
             window.location.href = '/admin';
         }).fail(function (error) {
             alert(JSON.stringify(error));
-            });
+        });
+
+    },
+
+    messageDelete : function() {
+
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/message/delete/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+        }).done(function() {
+            alert('메시지가 삭제되었습니다.');
+            window.location.href = '/admin';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
 
     }
 

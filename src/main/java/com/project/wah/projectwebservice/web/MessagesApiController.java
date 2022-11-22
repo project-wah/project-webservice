@@ -23,8 +23,8 @@ public class MessagesApiController {
 
     // 메시지 상세 조회
     @GetMapping("/message/read/{messageId}")
-    public MessageReadResponseDto findById (@PathVariable Long messageId, @LoginUser SessionUser sessionUser) {
-        return messageService.findById(messageId, sessionUser);
+    public MessageReadResponseDto findById (@PathVariable Long messageId) {
+        return messageService.findById(messageId);
     }
 
     // 메시지 삭제

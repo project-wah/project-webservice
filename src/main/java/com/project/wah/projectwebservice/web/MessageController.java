@@ -91,7 +91,7 @@ public class MessageController {
             model.addAttribute("userdName", user);
         }
 
-        MessageReadResponseDto dto = messageService.findById(id, user);
+        MessageReadResponseDto dto = messageService.findById(id);
 
         model.addAttribute("mess", dto);
 

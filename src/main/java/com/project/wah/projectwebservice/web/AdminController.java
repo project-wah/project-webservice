@@ -6,6 +6,7 @@ import com.project.wah.projectwebservice.domain.user.User;
 import com.project.wah.projectwebservice.service.MessageService;
 import com.project.wah.projectwebservice.service.UsersService;
 import com.project.wah.projectwebservice.web.dto.message.MessageListReadResponseDto;
+import com.project.wah.projectwebservice.web.dto.message.MessageReadResponseDto;
 import com.project.wah.projectwebservice.web.dto.user.UserListResponseDto;
 import com.project.wah.projectwebservice.web.dto.user.UsersResponseDto;
 import com.project.wah.projectwebservice.web.dto.user.UsersUpdateRequestDto;
@@ -89,4 +90,14 @@ public class AdminController {
         return "/admin/admin-message";
     }
 
+    // 메시지 상세 보기
+    @GetMapping("/admin/message/detail/{id}")
+    public String messageDetail(@PathVariable Long id, Model model){
+
+        MessageReadResponseDto dto = messageService.findById(id);
+        model.addAttribute("messageDetail", dto);
+
+        return "/admin/admin-messageDetail";
+
+    }
 }

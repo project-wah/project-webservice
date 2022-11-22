@@ -11,6 +11,10 @@ var main = {
             _this.roleUpdate();
         });
 
+        $('#btn-user-delete').on('click', function() {
+            _this.userDelete();
+        });
+
         $('#btn-message-delete').on('click', function() {
             _this.messageDelete();
         });
@@ -32,6 +36,24 @@ var main = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('사용자 권한이 수정되었습니다.');
+            window.location.href = '/admin';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+
+    },
+
+    userDelete : function() {
+
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/users/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+        }).done(function() {
+            alert('회원 탈퇴가 정상적으로 이루어졌습니다.');
             window.location.href = '/admin';
         }).fail(function (error) {
             alert(JSON.stringify(error));

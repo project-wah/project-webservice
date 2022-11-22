@@ -41,5 +41,11 @@ public class UsersApiController {
         return usersService.delete(sessionUser, httpSession);
     }
 
+    //Admin 페이지에서의 User 테이블 삭제
+    @DeleteMapping("/api/v1/users/{id}")
+    public Long adminDelete(@PathVariable Long id) {
+        return usersService.adminDelete(id);
+    }
+
 
 }

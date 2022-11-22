@@ -82,6 +82,17 @@ public class UsersService {
         return sessionUser.getId();
     }
 
+    // Admin 페이지에서의 User 테이블 삭제(유저 id에 따른 회원 탈퇴)
+    @Transactional
+    public Long adminDelete(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("해당 유저가 없습니다. id="+ id));
+
+        userRepository.delete(user);
+
+        return id;
+    }
+
     // 유저 이름(name) 검색
     @Transactional
     public Page<UserListResponseDto> searchName(String search, Pageable pageable) {

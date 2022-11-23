@@ -30,7 +30,12 @@ public class UsersService {
         User user = userRepository.findById(sessionUser.getId()).orElseThrow(() ->
                 new IllegalArgumentException("해당 유저가 없습니다. id="+ sessionUser.getId()));
 
-        user.detailUpdate(requestDto.getUsername(),requestDto.getNickname(), requestDto.getAboutme(), requestDto.getGithubemail(), requestDto.getBlogaddress(), requestDto.getPhonenumber(), requestDto.getRole());
+        user.detailUpdate(requestDto.getUsername(),requestDto.getNickname(), requestDto.getAboutme(), requestDto.getGithubemail(), requestDto.getBlogaddress(), requestDto.getPhonenumber());
+
+        // 초기에 GUEST가 상세 정보를 등록할 경우에만 USER 권한으로 변경된다.
+        if(user.getRole() == Role.GUEST) {
+            user.roleUserUpdate();
+        }
 
         //세션 삭제(httpSession.setattribute를 할 경우 세션 등록은 되나, 권한 초기화를 위해 세션 삭제를 함)
         httpSession.invalidate();

@@ -28,7 +28,7 @@ public class AdminController {
     private final MessageService messageService;
 
     // 관리자 메인 페이지
-    // 유저 전체 조회 및 관리
+    // 유저 전체 조회 페이지
     @GetMapping("/admin")
     public String admin(Model model, @LoginUser SessionUser user, @PageableDefault(size = 15, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable) {
 
@@ -47,7 +47,7 @@ public class AdminController {
         return "/admin/admin-user";
     }
 
-    // 유저 이름(name) 검색
+    // 유저 이름(name) 검색 후 전체 조회 페이지
     @GetMapping("/admin/user/search")
     public String searchName(Model model, String search, @PageableDefault(size = 15, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable) {
 
@@ -63,8 +63,8 @@ public class AdminController {
         return "/admin/admin-userSearch";
     }
 
-    // 유저 상세 정보 보기 및 권한 변경
-    @GetMapping("/admin/user/search/{id}")
+    // 유저 상세 조회 및 유저의 권한(Role) 수정
+    @GetMapping("/admin/user/detail/{id}")
     public String searchDetail(@PathVariable Long id, Model model) {
 
         UsersResponseDto dto = usersService.findById(id);
@@ -73,9 +73,8 @@ public class AdminController {
         return "/admin/admin-userDetail";
     }
 
-    // 회원 별 메시지 리스트 조회
-    // 보낸 메시지 조회
-    @GetMapping("/admin/message/read/{id}")
+    // 유저 별 보낸 메시지 전체 조회
+    @GetMapping("/admin/message/{id}")
     public String senderReadMessage(@PathVariable Long id, Model model, @PageableDefault(size = 15, sort = "createdate", direction = Sort.Direction.DESC) Pageable pageable) {
 
         Page<MessageListReadResponseDto> allMessages = messageService.findAllMessageDesc(id, pageable);
@@ -90,7 +89,7 @@ public class AdminController {
         return "/admin/admin-message";
     }
 
-    // 메시지 상세 보기
+    // 메시지 상세 조회
     @GetMapping("/admin/message/detail/{id}")
     public String messageDetail(@PathVariable Long id, Model model){
 

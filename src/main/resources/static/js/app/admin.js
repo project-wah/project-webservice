@@ -30,7 +30,7 @@ var main = {
 
         $.ajax({
             type: 'PUT',
-            url: '/api/v1/users/update/'+id,
+            url: '/api/v1/users/'+id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -67,7 +67,7 @@ var main = {
 
         $.ajax({
             type: 'DELETE',
-            url: '/message/delete/'+id,
+            url: '/api/v1/messages/'+id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
         }).done(function() {

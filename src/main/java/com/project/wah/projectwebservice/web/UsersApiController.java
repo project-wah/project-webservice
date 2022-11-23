@@ -17,31 +17,31 @@ public class UsersApiController {
 
     private final UsersService usersService;
 
-    //User 테이블의 일부 칼럼 수정(nickname, aboutme, mentoremail, githubeamil, blogaddress)
+    // 유저 정보 수정
     @PutMapping("/api/v1/users")
     public Long update(@LoginUser SessionUser sessionUser, @RequestBody UsersUpdateRequestDto requestDto, HttpSession httpSession){
         return usersService.update(sessionUser, requestDto, httpSession);
     }
 
-    //User 권한 수정
-    @PutMapping("/api/v1/users/update/{id}")
+    // 유저 권한 수정
+    @PutMapping("/api/v1/users/{id}")
     public Long roleUpdate(@PathVariable Long id, @RequestBody UsersUpdateRequestDto requestDto) {
         return usersService.roleUpdate(id, requestDto);
     }
 
-    //User 테이블 개별 조회
+    // 유저 상세 조회
     @GetMapping("/api/v1/users/{id}")
     public UsersResponseDto findById (@PathVariable Long id){
         return usersService.findById(id);
     }
 
-    //User 테이블 삭제
+    // 유저 삭제(회원이 자신을 탈퇴시킴)
     @DeleteMapping("/api/v1/users")
     public Long delete(@LoginUser SessionUser sessionUser, HttpSession httpSession) {
         return usersService.delete(sessionUser, httpSession);
     }
 
-    //Admin 페이지에서의 User 테이블 삭제
+    // 유저 삭제(관리자가 유저를 탈퇴시킴)
     @DeleteMapping("/api/v1/users/{id}")
     public Long adminDelete(@PathVariable Long id) {
         return usersService.adminDelete(id);

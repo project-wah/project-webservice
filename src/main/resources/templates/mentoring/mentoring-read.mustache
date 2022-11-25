@@ -1,0 +1,45 @@
+{{>layout/header}}
+<br/>
+<div id="mentoring_list">
+    <div class="col-md-12">
+        <form class="card">
+            <div class="card-header d-flex justify-content-between">
+                <label for="id">번호 : {{mentoring.id}}</label>
+                <input type="hidden" id="id" value="{{mentoring.id}}"> {{! label 연결 }}
+                <label for="createdDate">{{mentoring.createdDate}}</label>
+            </div>
+            <div class="card-header d-flex justify-content-between">
+                <label for="author">작성자 : {{mentoring.author}}</label>
+                <!--
+                <label for="view"><i class=" bi bi-eye-fill"> {{mentoring.view}}</i></label>
+                -->
+            </div>
+            <div class="card-body">
+                <label for="title">제목</label>
+                <input type="text" class="form-control" id="title" value="{{mentoring.title}}" readonly>
+                <br/>
+                <label for="content">내용</label>
+                <textarea rows="5" class="form-control" id="content" readonly>{{mentoring.content}}</textarea>
+            </div>
+        </form>
+
+
+        {{! Buttons }}
+        {{#user}}
+            <a href="/mentoring" role="button" class="btn btn-info bi bi-arrow-return-left"> 목록</a>
+            {{#author}}
+                <a href="/mentoring/update/{{mentoring.id}}" role="button" class="btn btn-primary bi bi-pencil-square"> 수정</a>
+                <button type="button" onclick="" id="btn-deleteMentoring" class="btn btn-danger bi bi-trash"> 삭제</button>
+            {{/author}}
+        {{/user}}
+        {{^user}}
+            <a href="/mentoring" role="button" class="btn btn-info bi bi-arrow-return-left"> 목록</a>
+        {{/user}}
+        <!--
+        {{! Comments }}
+        {{>comment/list}}
+        {{>comment/form}}
+        -->
+    </div>
+</div>
+{{>layout/footer}}

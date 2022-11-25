@@ -15,6 +15,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByNickname(String nickname);
 
+    User findByName(String name);
+
     // 유저 전체 조회
     @Query("SELECT u FROM User u ORDER BY u.id DESC")
     Page<User> findAllDesc(Pageable pageable);

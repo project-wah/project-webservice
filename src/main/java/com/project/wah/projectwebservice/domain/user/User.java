@@ -1,6 +1,7 @@
 package com.project.wah.projectwebservice.domain.user;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.project.wah.projectwebservice.domain.BaseTimeEntity;
+import com.project.wah.projectwebservice.domain.mentoring.Mentoring;
 import com.project.wah.projectwebservice.domain.message.Message;
 import lombok.Builder;
 import lombok.Getter;
@@ -53,6 +54,10 @@ public class User extends BaseTimeEntity {
 
     @Column
     private int phonenumber;
+
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "userId")
+//    private Mentoring mentoring;
 
     // 쪽지 양방향, 회원이 삭제되면 쪽지(발송한 쪽지)도 같이 삭제
     @OneToMany(mappedBy = "sender", cascade = CascadeType.REMOVE)

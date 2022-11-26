@@ -19,7 +19,7 @@ public class UserController {
 
     private final UsersService usersService;
 
-    // 회원 정보 수정
+    // 유저 정보 수정
     @GetMapping("/users/update")
     public String usersUpdate(Model model, @LoginUser SessionUser user){
 
@@ -30,8 +30,8 @@ public class UserController {
         return "user-update";
     }
 
-    // 유저 상세 보기
-    @GetMapping("/users/detail/read/{id}")
+    // 유저 상세 조회
+    @GetMapping("/users/detail/{id}")
     public String userDetailRead(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
             model.addAttribute("useName", user.getName());

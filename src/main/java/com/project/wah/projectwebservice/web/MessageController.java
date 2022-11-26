@@ -21,9 +21,9 @@ public class MessageController {
 
     private final MessageService messageService;
 
-    // 메시지 보관함
-    @GetMapping("/message/locker")
-    public String messagelocker(Model model, @LoginUser SessionUser user) {
+    // 메시지 메인 페이지
+    @GetMapping("/messages")
+    public String messageLocker(Model model, @LoginUser SessionUser user) {
         if(user != null) {
             model.addAttribute("useName", user.getName());
             model.addAttribute("userdName", user);
@@ -34,7 +34,7 @@ public class MessageController {
     }
 
     // 메시지 생성
-    @GetMapping("/message/create")
+    @GetMapping("/messages/create")
     public String messageCreate(Model model, @LoginUser SessionUser user) {
         if(user != null) {
             model.addAttribute("useName", user.getName());
@@ -45,8 +45,8 @@ public class MessageController {
 
     }
 
-    // 받은 메시지 조회
-    @GetMapping("/message/receiver/read")
+    // 받은 메시지 전체 조회
+    @GetMapping("/messages/receive/list")
     public String receiverReadMessage(Model model, @LoginUser SessionUser user, @PageableDefault(size = 15, sort = "createdate", direction = Sort.Direction.DESC) Pageable pageable) {
         if(user != null) {
             model.addAttribute("useName", user.getName());
@@ -64,8 +64,8 @@ public class MessageController {
         return "message-receiverread";
     }
 
-    // 보낸 메시지 조회
-    @GetMapping("/message/sender/read")
+    // 보낸 메시지 전체 조회
+    @GetMapping("/messages/send/list")
     public String senderReadMessage(Model model, @LoginUser SessionUser user, @PageableDefault(size = 15, sort = "createdate", direction = Sort.Direction.DESC) Pageable pageable) {
         if(user != null) {
             model.addAttribute("useName", user.getName());
@@ -84,14 +84,14 @@ public class MessageController {
     }
 
     // 메시지 상세 조회
-    @GetMapping("/message/detail/read/{id}")
+    @GetMapping("/messages/detail/{id}")
     public String messageDetailRead(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         if(user != null) {
             model.addAttribute("useName", user.getName());
             model.addAttribute("userdName", user);
         }
 
-        MessageReadResponseDto dto = messageService.findById(id, user);
+        MessageReadResponseDto dto = messageService.findById(id);
 
         model.addAttribute("mess", dto);
 

@@ -91,13 +91,17 @@ public class User extends BaseTimeEntity {
         return this;
     }
 
-    public void detailUpdate(String username, String nickname, String aboutme, String githubemail, String blogaddress, int phonenumber, Role role) {
+    public void detailUpdate(String username, String nickname, String aboutme, String githubemail, String blogaddress, int phonenumber) {
         this.username = username;
         this.nickname = nickname;
         this.aboutme = aboutme;
         this.githubemail = githubemail;
         this.blogaddress = blogaddress;
         this.phonenumber = phonenumber;
+    }
+
+    // 권한(Role)을 손님(ROLE_GUEST) -> 유저(ROLE_USER)로 수정
+    public void roleUserUpdate() {
         this.role = Role.USER;
     }
 

@@ -11,6 +11,14 @@ var main = {
             _this.roleUpdate();
         });
 
+        $('#btn-user-delete').on('click', function() {
+            _this.userDelete();
+        });
+
+        $('#btn-message-delete').on('click', function() {
+            _this.messageDelete();
+        });
+
     },
 
     roleUpdate : function() {
@@ -22,7 +30,7 @@ var main = {
 
         $.ajax({
             type: 'PUT',
-            url: '/api/v1/users/update/'+id,
+            url: '/api/v1/users/'+id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -31,7 +39,43 @@ var main = {
             window.location.href = '/admin';
         }).fail(function (error) {
             alert(JSON.stringify(error));
-            });
+        });
+
+    },
+
+    userDelete : function() {
+
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/users/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+        }).done(function() {
+            alert('회원 탈퇴가 정상적으로 이루어졌습니다.');
+            window.location.href = '/admin';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+
+    },
+
+    messageDelete : function() {
+
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/messages/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+        }).done(function() {
+            alert('메시지가 삭제되었습니다.');
+            window.location.href = '/admin';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
 
     }
 

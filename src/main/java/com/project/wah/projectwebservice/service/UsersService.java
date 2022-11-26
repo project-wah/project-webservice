@@ -30,7 +30,12 @@ public class UsersService {
         User user = userRepository.findById(sessionUser.getId()).orElseThrow(() ->
                 new IllegalArgumentException("해당 유저가 없습니다. id="+ sessionUser.getId()));
 
-        user.detailUpdate(requestDto.getUsername(),requestDto.getNickname(), requestDto.getAboutme(), requestDto.getGithubemail(), requestDto.getBlogaddress(), requestDto.getPhonenumber(), requestDto.getRole());
+        user.detailUpdate(requestDto.getUsername(),requestDto.getNickname(), requestDto.getAboutme(), requestDto.getGithubemail(), requestDto.getBlogaddress(), requestDto.getPhonenumber());
+
+        // 초기에 GUEST가 상세 정보를 등록할 경우에만 USER 권한으로 변경된다.
+        if(user.getRole() == Role.GUEST) {
+            user.roleUserUpdate();
+        }
 
         //세션 삭제(httpSession.setattribute를 할 경우 세션 등록은 되나, 권한 초기화를 위해 세션 삭제를 함)
         httpSession.invalidate();
@@ -80,6 +85,17 @@ public class UsersService {
         httpSession.invalidate();
 
         return sessionUser.getId();
+    }
+
+    // Admin 페이지에서의 User 테이블 삭제(유저 id에 따른 회원 탈퇴)
+    @Transactional
+    public Long adminDelete(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("해당 유저가 없습니다. id="+ id));
+
+        userRepository.delete(user);
+
+        return id;
     }
 
     // 유저 이름(name) 검색

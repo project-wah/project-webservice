@@ -12,9 +12,9 @@
     <tbody id="tbody">
     {{#readList}}
         <tr>
-            <td><a href="/users/detail/read/{{senderId}}">{{sender}}</td>
-            <td><a href="/users/detail/read/{{receiverId}}">{{receiver}}</a></td>
-            <td><a href="/message/detail/read/{{id}}">{{title}}</td>
+            <td><a href="/users/detail/{{senderId}}">{{sender}}</td>
+            <td><a href="/users/detail/{{receiverId}}">{{receiver}}</a></td>
+            <td><a href="/messages/detail/{{id}}">{{title}}</td>
             <td>{{createDate}}</td>
         </tr>
     {{/readList}}

@@ -30,13 +30,13 @@
         <tbody id="tbody">
         {{#allusers}}
             <tr>
-                <td><a href="/admin/user/search/{{id}}">{{name}}</a></td>
+                <td><a href="/admin/user/detail/{{id}}">{{name}}</a></td>
                 <td>{{#nickname}}{{nickname}}{{/nickname}}{{^nickname}}-{{/nickname}}</td>
                 <td>{{email}}</td>
                 <td>{{createdDate}}</td>
                 <td>{{role}}</td>
                 <td>-</td>
-                <td><a href="/admin/message/read/{{id}}">{{messageSize}}</a></td>
+                <td><a href="/admin/message/{{id}}">{{messageSize}}</a></td>
             </tr>
         {{/allusers}}
         </tbody>

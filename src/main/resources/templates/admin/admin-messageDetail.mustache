@@ -1,0 +1,43 @@
+{{>admin/admin-sidebar}}
+
+<div class="content">
+    <div class="header-box">
+        <h1 class="fs-4"><span class="text-black", style="font-weight: bold;">
+            <a href="/admin">회원 관리</a></span></h1>
+    </div>
+
+    <hr class="h2-color mx-2">
+
+    <div class="message-detail">
+        <div class="col-md-4" style="float: none; margin:0 auto;">
+            <form>
+                <div class="form-group">
+                    <label for="id">메시지 번호</label>
+                    <input type="text" class="form-control" id="id" value="{{messageDetail.id}}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="sender">보낸 사람</label>
+                    <input type="text" class="form-control" id="sender" value="{{messageDetail.sender}}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="receiver">받은 사람</label>
+                    <input type="text" class="form-control" id="receiver" value="{{messageDetail.receiver}}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="title">제목</label>
+                    <input type="text" class="form-control" id="title" value="{{messageDetail.title}}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="content">내용</label>
+                    <textarea class="form-control" id="content" readonly>{{messageDetail.content}}</textarea>
+                </div>
+            </form>
+            <a href="/admin/message/read/{{messageDetail.senderId}}" role="button" class="btn btn-secondary">뒤로 가기</a>
+            <button type="button" class="btn btn-primary" id="btn-message-delete">삭제</button>
+        </div>
+    </div>
+
+</div>
+</div>
+
+{{>layout/footer}}

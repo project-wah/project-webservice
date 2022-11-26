@@ -1,7 +1,9 @@
 package com.project.wah.projectwebservice.domain.user;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.project.wah.projectwebservice.domain.BaseTimeEntity;
+import com.project.wah.projectwebservice.domain.mentoring.Mentoring;
 import com.project.wah.projectwebservice.domain.message.Message;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.*;
 
-
+@AllArgsConstructor
+@Builder
 @Getter
 @NoArgsConstructor
 @Entity

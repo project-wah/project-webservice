@@ -1,0 +1,47 @@
+{{>layout/header}}
+<div id="mentoring_list">
+    <table id="table" class="table table-horizontal">
+        <thead id="thead">
+        <tr>
+            <th>번호</th>
+            <th class="col-md-6 text-center">제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#searchList}}
+            <tr>
+                <td>{{id}}</td>
+                <td><a href="/mentoring/read/{{id}}">{{title}}</a></td>
+                <td>{{author}}</td>
+                <td>{{modifiedDate}}</td>
+
+            </tr>
+        {{/searchList}}
+        </tbody>
+    </table>
+    <div class="text-right">
+        <a href="/mentoring/create" role="button" class="btn btn-primary bi bi-pencil-fill"> 멘토링 소개글 쓰기</a>
+    </div>
+
+    {{! Search Paging }}
+    <div class="pagination justify-content-center">
+        {{#hasPrev}}
+            <a href="/mentoring/search?keyword={{keyword}}&page={{previous}}" role="button" class="btn btn-lg bi bi-caret-left-square-fill"></a>
+        {{/hasPrev}}
+        {{^hasPrev}}
+            <a href="/mentoring/search?keyword={{keyword}}&page={{previous}}" role="button" class="btn btn-lg bi bi-caret-left-square-fill disabled"></a>
+        {{/hasPrev}}
+
+        {{#hasNext}}
+            <a href="/mentoring/search?keyword={{keyword}}&page={{next}}" role="button" class="btn btn-lg bi bi-caret-right-square-fill"></a>
+        {{/hasNext}}
+        {{^hasNext}}
+            <a href="/mentoring/search?keyword={{keyword}}&page={{next}}" role="button" class="btn btn-lg bi bi-caret-right-square-fill disabled"></a>
+        {{/hasNext}}
+    </div>
+
+</div>
+{{>layout/footer}}

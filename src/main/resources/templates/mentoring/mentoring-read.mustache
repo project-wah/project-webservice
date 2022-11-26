@@ -10,9 +10,7 @@
             </div>
             <div class="card-header d-flex justify-content-between">
                 <label for="author">작성자 : {{mentoring.author}}</label>
-                <!--
-                <label for="view"><i class=" bi bi-eye-fill"> {{mentoring.view}}</i></label>
-                -->
+
             </div>
             <div class="card-body">
                 <label for="title">제목</label>
@@ -20,6 +18,15 @@
                 <br/>
                 <label for="content">내용</label>
                 <textarea rows="5" class="form-control" id="content" readonly>{{mentoring.content}}</textarea>
+                <br/>
+                <label for="job">직군</label>
+                <input type="text" class="form-control" id="job" value="{{mentoring.job}}" readonly>
+                <br/>
+                <label for="career">경력</label>
+                <input type="text" class="form-control" id="career" value="{{mentoring.career}}" readonly>
+                <br/>
+                <label for="office">현재 직장</label>
+                <input type="text" class="form-control" id="office" value="{{mentoring.office}}" readonly>
             </div>
         </form>
 
@@ -35,11 +42,7 @@
         {{^user}}
             <a href="/mentoring" role="button" class="btn btn-info bi bi-arrow-return-left"> 목록</a>
         {{/user}}
-        <!--
-        {{! Comments }}
-        {{>comment/list}}
-        {{>comment/form}}
-        -->
+
     </div>
 </div>
 {{>layout/footer}}

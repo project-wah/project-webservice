@@ -16,9 +16,17 @@ public class MentoringApiController {
     private final MentoringService mentoringService;
 
     //CREATE
+    /* 오류 수정하기 전
     @PostMapping("/v1/mentoring")
     public ResponseEntity save(@RequestBody MentoringDto.Request dto, @LoginUser SessionUser sessionUser) {
         return ResponseEntity.ok(mentoringService.save(dto, sessionUser.getName()));
+    }
+    */
+
+    //오류 수정한 이후
+    @PostMapping("/v1/mentoring")
+    public Long save(@RequestBody MentoringDto.Request dto, @LoginUser SessionUser sessionUser) {
+        return mentoringService.save(dto, sessionUser);
     }
 
     //READ

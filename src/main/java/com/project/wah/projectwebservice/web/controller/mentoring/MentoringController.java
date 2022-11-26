@@ -5,7 +5,6 @@ import com.project.wah.projectwebservice.config.auth.dto.SessionUser;
 import com.project.wah.projectwebservice.domain.mentoring.Mentoring;
 import com.project.wah.projectwebservice.service.MentoringService;
 import com.project.wah.projectwebservice.web.dto.mentoring.MentoringDto;
-import com.project.wah.projectwebservice.web.dto.user.UserListResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -29,11 +28,11 @@ public class MentoringController {
 
     @GetMapping("/mentoring")
     public String mentoring(Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC)
-                        Pageable pageable, @LoginUser SessionUser userListResponseDto) {
+                        Pageable pageable, @LoginUser SessionUser sessionUser) {
         Page<Mentoring> list = mentoringService.pageList(pageable);
 
-        if(userListResponseDto != null) {
-            model.addAttribute("user", userListResponseDto);
+        if(sessionUser != null) {
+            model.addAttribute("user", sessionUser);
         }
 
         model.addAttribute("mentoring", list);
@@ -49,37 +48,38 @@ public class MentoringController {
 
     //멘토링 소개글 작성
     @GetMapping("/mentoring/create")
-    public String create(@LoginUser SessionUser userListResponseDto, Model model) {
-        if (userListResponseDto != null) {
-            model.addAttribute("user", userListResponseDto);
+    public String create(@LoginUser SessionUser sessionUser, Model model) {
+        if (sessionUser != null) {
+            model.addAttribute("user", sessionUser);
         }
         return "/mentoring/mentoring-create";
     }
 
     //멘토링 소개글 상세보기
     @GetMapping("/mentoring/read/{id}")
-    public String read(@PathVariable Long id, @LoginUser SessionUser userListResponseDto, Model model) {
+    public String read(@PathVariable Long id, @LoginUser SessionUser sessionUser, Model model) {
         MentoringDto.Response dto = mentoringService.findById(id);
 
         //사용자 확인
-        if (userListResponseDto != null) {
-            model.addAttribute("user", userListResponseDto);
+        if (sessionUser != null) {
+            model.addAttribute("user", sessionUser);
             
             //멘토링 소개글 작성자 본인이 맞는지 확인
-            if (dto.getUserId().equals(userListResponseDto.getId())) {
+            if (dto.getUserId().equals(sessionUser.getId())) {
                 model.addAttribute("author", true);
             }
         }
 
+        model.addAttribute("mentoring", dto);
         return "/mentoring/mentoring-read";
     }
 
     //멘토링 소개글 수정
     @GetMapping("/mentoring/update/{id}")
-    public String update(@PathVariable Long id, @LoginUser SessionUser userListResponseDto, Model model) {
+    public String update(@PathVariable Long id, @LoginUser SessionUser sessionUser, Model model) {
         MentoringDto.Response dto = mentoringService.findById(id);
-        if(userListResponseDto != null) {
-            model.addAttribute("user", userListResponseDto);
+        if(sessionUser != null) {
+            model.addAttribute("user", sessionUser);
         }
         model.addAttribute("mentoring", dto);
 
@@ -89,11 +89,11 @@ public class MentoringController {
     //멘토링 소개 페이지에서 검색
     @GetMapping("/mentoring/search")
     public String search(String keyword, Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC)
-                         Pageable pageable, @LoginUser SessionUser userListResponseDto) {
+                         Pageable pageable, @LoginUser SessionUser sessionUser) {
         Page<Mentoring> searchList = mentoringService.search(keyword, pageable);
 
-        if(userListResponseDto != null) {
-            model.addAttribute("user", userListResponseDto);
+        if(sessionUser != null) {
+            model.addAttribute("user", sessionUser);
         }
 
         model.addAttribute("searchList", searchList);

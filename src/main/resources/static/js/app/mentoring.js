@@ -78,7 +78,7 @@ var main = {
                     data: JSON.stringify(data)
                 }).done(function () {
                     alert("수정이 완료되었습니다.");
-                    window.location.href = '/v1/mentoring/read/' + data.id;
+                    window.location.href = '/mentoring/read/' + data.id;
                 }).fail(function (error) {
                     alert(JSON.stringify(error));
                 });

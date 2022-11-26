@@ -1,5 +1,7 @@
 package com.project.wah.projectwebservice.service;
 
+import com.project.wah.projectwebservice.config.auth.LoginUser;
+import com.project.wah.projectwebservice.config.auth.dto.SessionUser;
 import com.project.wah.projectwebservice.domain.mentoring.Mentoring;
 import com.project.wah.projectwebservice.domain.mentoring.MentoringRepository;
 import com.project.wah.projectwebservice.domain.user.User;
@@ -21,6 +23,8 @@ public class MentoringService {
     private final UserRepository userRepository;
 
     //CREATE
+    /*
+    * 수정하기 전
     @Transactional
     public Long save(MentoringDto.Request dto, String name) {
         User user = userRepository.findByName(name);
@@ -30,6 +34,17 @@ public class MentoringService {
         mentoringRepository.save(mentoring);
 
         return mentoring.getId();
+    }
+    */
+    @Transactional
+    public Long save(MentoringDto.Request dto, @LoginUser SessionUser sessionUser) {
+        User user = userRepository.findById(sessionUser.getId()).orElseThrow(() ->
+                new IllegalArgumentException("해당 유저가 없습니다. id=" + sessionUser.getId()));
+        log.info("MentoringService save() 실행");
+        Mentoring mentoring = dto.toEntity();
+        mentoring.setUser(user);
+
+        return mentoringRepository.save(mentoring).getId();
     }
 
     //READ : 게시글 리스트 조회

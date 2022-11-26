@@ -14,7 +14,6 @@ public class MentoringDto {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    @Getter
     @Builder
     public static class Request {
         private Long id;
@@ -32,6 +31,9 @@ public class MentoringDto {
         private String career;
         private String office;
 
+        /*
+        * 수정하기 전
+        * 수정 후 -> User제외
         private User user;
 
         public Mentoring toEntity() {
@@ -48,6 +50,21 @@ public class MentoringDto {
 
             return mentoring;
         }
+        */
+        public Mentoring toEntity() {
+            Mentoring mentoring = Mentoring.builder()
+                    .id(id)
+                    .title(title)
+                    .author(author)
+                    .content(content)
+                    .job(job)
+                    .career(career)
+                    .office(office)
+                    .build();
+
+            return mentoring;
+        }
+        
     }
 
     /**

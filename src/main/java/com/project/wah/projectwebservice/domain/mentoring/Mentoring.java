@@ -1,5 +1,6 @@
 package com.project.wah.projectwebservice.domain.mentoring;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.wah.projectwebservice.domain.BaseTimeEntity;
 import com.project.wah.projectwebservice.domain.user.User;
 import lombok.AllArgsConstructor;
@@ -9,10 +10,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 @Entity
 public class Mentoring extends BaseTimeEntity {
 
@@ -46,12 +47,20 @@ public class Mentoring extends BaseTimeEntity {
     private String office;
 
     /**
-     * User의 id를 MentorIntro의 FK로 지정
+     * User의 id를 Mentoring의 FK로 지정
      * 한 명의 멘토는 자신의 소개글을 단 하나만 작성 가능하기 때문에 일대일 관계
      */
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
+
+    /**
+     * 오류 수정하면서 새롭게 추가한 부분
+     * @param user
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     //멘토링 소개글 수정 관련
     public void update(String title, String content, String job, String career, String office) {
@@ -62,3 +71,4 @@ public class Mentoring extends BaseTimeEntity {
         this.office = office;
     }
 }
+

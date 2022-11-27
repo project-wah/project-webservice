@@ -37,6 +37,9 @@ dependencies {
 	// Swagger
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
+	// MariaDB 드라이버
+	implementation 'org.mariadb.jdbc:mariadb-java-client'
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}

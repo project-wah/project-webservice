@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# 로그인 관련
+src/main/resources/application-oauth.properties

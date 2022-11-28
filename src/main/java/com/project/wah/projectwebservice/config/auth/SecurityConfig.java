@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/users/**").permitAll()
                     .antMatchers("/messages/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                     .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
+                    .antMatchers("/mentoring", "/mentoring/read/**", "/mentoring/search/**", "/mentoring/page/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .logout()

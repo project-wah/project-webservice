@@ -43,7 +43,7 @@ public class MentoringController {
         model.addAttribute("hasNext", list.hasNext());
         model.addAttribute("hasPrev", list.hasPrevious());
 
-        return "/mentoring/mentoring";
+        return "mentoring/mentoring";
     }
 
     //멘토링 소개글 작성
@@ -52,7 +52,7 @@ public class MentoringController {
         if (sessionUser != null) {
             model.addAttribute("user", sessionUser);
         }
-        return "/mentoring/mentoring-create";
+        return "mentoring/mentoring-create";
     }
 
     //멘토링 소개글 상세보기
@@ -71,7 +71,7 @@ public class MentoringController {
         }
 
         model.addAttribute("mentoring", dto);
-        return "/mentoring/mentoring-read";
+        return "mentoring/mentoring-read";
     }
 
     //멘토링 소개글 수정
@@ -83,7 +83,7 @@ public class MentoringController {
         }
         model.addAttribute("mentoring", dto);
 
-        return "/mentoring/mentoring-update";
+        return "mentoring/mentoring-update";
     }
 
     //멘토링 소개 페이지에서 검색
@@ -103,6 +103,6 @@ public class MentoringController {
         model.addAttribute("hasNext", searchList.hasNext());
         model.addAttribute("hasPrev", searchList.hasPrevious());
 
-        return "/mentoring/mentoring-search";
+        return "mentoring/mentoring-search";
     }
 }

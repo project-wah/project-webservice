@@ -44,7 +44,7 @@ public class AdminController {
         model.addAttribute("hasNext", allusers.hasNext());
         model.addAttribute("hasPrev", allusers.hasPrevious());
 
-        return "/admin/admin-user";
+        return "admin/admin-user";
     }
 
     // 유저 이름(name) 검색 후 전체 조회 페이지
@@ -60,7 +60,7 @@ public class AdminController {
         model.addAttribute("hasNext", userSearch.hasNext());
         model.addAttribute("hasPrev", userSearch.hasPrevious());
 
-        return "/admin/admin-userSearch";
+        return "admin/admin-userSearch";
     }
 
     // 유저 상세 조회 및 유저의 권한(Role) 수정
@@ -70,7 +70,7 @@ public class AdminController {
         UsersResponseDto dto = usersService.findById(id);
         model.addAttribute("userDetail", dto);
 
-        return "/admin/admin-userDetail";
+        return "admin/admin-userDetail";
     }
 
     // 유저 별 보낸 메시지 전체 조회
@@ -86,7 +86,7 @@ public class AdminController {
         model.addAttribute("hasNext", allMessages.hasNext());
         model.addAttribute("hasPrev", allMessages.hasPrevious());
 
-        return "/admin/admin-message";
+        return "admin/admin-message";
     }
 
     // 메시지 상세 조회
@@ -96,7 +96,7 @@ public class AdminController {
         MessageReadResponseDto dto = messageService.findById(id);
         model.addAttribute("messageDetail", dto);
 
-        return "/admin/admin-messageDetail";
+        return "admin/admin-messageDetail";
 
     }
 }

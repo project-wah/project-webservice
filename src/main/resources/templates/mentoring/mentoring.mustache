@@ -1,6 +1,6 @@
 {{>layout/header}}
 
-<div id="posts_list">
+<div id="mentoring_list">
     <table id="table" class="table table-horizontal">
         <thead id="thead">
         <tr>
@@ -25,8 +25,17 @@
         {{/mentoring}}
         </tbody>
     </table>
-    <div class="text-right">
-        <a href="/mentoring/create" role="button" class="btn btn-primary bi bi-pencil-fill"> 멘토링 소개글 쓰기</a>
+    <div class="row justify-content-between">
+        <div class="col-auto mr-auto">
+            <form action="/mentoring/search" method="GET" class="form-inline p-2 bd-highlight" role="search">
+                <input type="text" name="keyword" class="form-control" id="search" placeholder="검색">
+                <button class="btn btn-success bi bi-search"></button>
+            </form>
+        </div>
+        <div class="col-auto">
+            <a href="/mentoring/create" role="button" class="btn btn-primary p-2 bi bi-pencil-fill"> 멘토링 소개글 쓰기</a>
+        </div>
+
     </div>
     {{! Page }}
     {{>mentoring/mentoring-page}}
